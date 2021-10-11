@@ -93,11 +93,12 @@ In data science and machine learning, it can sometimes increase the predictive p
 ```{r q3}
 # Q3 --------------------------------------------------------------------------
 # Data transformations with mutate
-ipu_clean %>%
-  _______(ip_sq = _______,
-         ________________ = _______________,
-         ip_unemployment = ___________________) %>%
+mutation <- ipu_clean %>%
+  mutate(ip_sq = ip^2,
+         ue_log = log(unemployment),
+         ip_unemployment = ip*unemployment) %>%
   head()
+mutation
 
 # Optional --------------------------------------------------------------------
 # The skeleton code acts a possible hint, but you may prefer to do this more complex task your own way
