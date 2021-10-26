@@ -1,10 +1,3 @@
----
-title: "Reading JSON into R"
-author: "Friedrich Geiecke"
-date: "26/10/2020"
-output: html_document
----
-
 Loading packages:
 
 ```{r}
@@ -15,7 +8,7 @@ library("tidyverse")
 Specify the directory where the JSON files are stored:
 
 ```{r}
-current_dir <- "yourdirectoryhere"
+current_dir <- "/Users/jacobgreil/Downloads/5_Week/"
 ```
 
 Reading/parsing the first file into R:
