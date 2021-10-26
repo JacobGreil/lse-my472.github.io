@@ -29,7 +29,7 @@ We first start Selenium server in Firefox:
 
 ```{r}
 # Start the Selenium server:
-rD <- rsDriver(browser=c("firefox"), port = 1234L)
+rD <- rsDriver(browser=c("firefox"), port = 3332L)
 driver <- rD[["client"]]
 
 # Navigate to the selected URL address
@@ -69,7 +69,7 @@ Let's assume we want to see the results of the constituency here. We can feed po
 
 ```{r}
 # 1. identify the node for input
-search_field <- driver$findElement(using = "xpath", value = './html/body/div[3]/article/div/div[2]/div/figure/figure/div[2]/div[2]/div[1]/div[2]/input')
+search_field <- driver$findElement(using = 'class name', value = 'ge-lookup__input')
 
 # 2. send the post code
 search_field$sendKeysToElement(list("WC2A 2AE"))
@@ -90,7 +90,7 @@ Now that we have the results table displayed, we will scrape the name of constit
 
 ```{r}
 ## get the constituency name
-const_name <- driver$findElement(using = "xpath", value = '/html/body/div[3]/article/div/div[2]/div/figure/figure/div[5]/table/tbody/tr[3]/td[1]/b/span[2]')$getElementText() 
+const_name <- driver$findElement(using = "class name", value = 'ge-result__name')$getElementText() 
 
 ## get the div with the result information
 res_div <- driver$findElement(using = 'class name', value = 'ge-result')
