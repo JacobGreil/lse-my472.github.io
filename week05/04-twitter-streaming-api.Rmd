@@ -77,20 +77,16 @@ Note in particular that while the function is running, all output is written int
 First, we collect a random sample of tweets for 30 seconds and store it as a JSON file. Frequently the output from the streaming API is malformed JSON, so we need to do a bit of gymnastics with the tryCatch expression and function from JBGruber above:
 
 ```{r}
-<<<<<<< HEAD
-sample_tweets <- stream_tweets(q = "", timeout = 30)
-head(sample_tweets)
-head(sample_tweets$text)
-=======
+
 stream_tweets(q = "", timeout = 30, file_name='streamed_tweets.json')
 sample_tweets <- tryCatch({parse_stream('streamed_tweets.json')},
                        error = function(e)
                            {print(paste("Retrying with alternative function after initial error when parsing file",
                                         'streamed_tweets.json'));
                            return(recover_stream('streamed_tweets.json'))})
-head(____________)
-head(____________$text)
->>>>>>> upstream/master
+head(sample_tweets)
+head(sample_tweets$text)
+
 ```
 
 The returned tweets have been parsed into R directly as a data frame / tibble:
