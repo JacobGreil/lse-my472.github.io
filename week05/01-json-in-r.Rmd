@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+---
+title: "Reading JSON into R"
+author: "Friedrich Geiecke"
+date: "25/10/2021"
+output: html_document
+---
+
+>>>>>>> upstream/master
 Loading packages:
 
 ```{r}
