@@ -22,15 +22,15 @@ library("maps")
 First, we need to authenticate. After your application has been approved, you can paste the consumer key, consumer secret, access token, and access token secret strings into the list below:
 
 ```{r}
-authentication <- list(consumer_key = "CONSUMER_KEY",
-                 consumer_secret = "CONSUMER_SECRET",
-                 access_token = "ACCESS_TOKEN",
-                 access_token_secret = "ACCESS_TOKEN_SECRET")
+authentication <- list(consumer_key = "Wdt3H4dd7Bey4DuzPGBeBdqZL",
+                 consumer_secret = "uN5FIkEOCce1EL7v6f26NoxsILQBeWlu7ReoV6CBzQ0szv0EFI",
+                 access_token = "269392564-fYP4DN7HcMAoP3mKWUHDLv3VIz7oJnIUtkhVfvEC",
+                 access_token_secret = "Oho7oWV89eoa58DiO6Q5QHpB8yJPO2WeWFSKnc4jaQDRg")
 ```
 
 A more convenient approach could be to store this list once after you have pasted your keys and then to reload it when running some code. Store the list once with:
 
-```{t}
+```{r}
 save(authentication, file = "authentication.rda")
 ```
 
@@ -73,7 +73,7 @@ Note in particular that while the function is running, all output is written int
 First, we collect a random sample of tweets for 30 seconds and store it in an R object. Check your current folder to see how a JSON file is created and then deleted once the function finished and the output was assigned to the tweets object:
 
 ```{r}
-sample_tweets <- stream_tweets(q = ____, timeout = 30)
+sample_tweets <- stream_tweets(q = "", timeout = 30)
 head(sample_tweets)
 head(sample_tweets$text)
 ```
