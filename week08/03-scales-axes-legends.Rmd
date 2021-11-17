@@ -19,7 +19,7 @@ library("gridExtra")
 ```
 
 ```{r}
-df <- read.csv("data/fb-congress-data.csv", stringsAsFactors = TRUE)
+df <- read.csv("fb-congress-data.csv", stringsAsFactors = TRUE)
 
 # Transform date column to datetime
 df$date <- as_date(df$date)
