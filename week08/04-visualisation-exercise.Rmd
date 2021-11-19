@@ -10,6 +10,9 @@ output: html_document
 library("tidyverse")
 library("plotly")
 library("scales")
+library("lubridate")
+install.packages('plotly')
+
 ```
 
 
@@ -20,7 +23,7 @@ Try to replicate the following line chart that displays the evolution in the une
 ```{r}
 
 # Creating a dataframe with the unemployment data
-unemp <- read.csv("data/unemployment.csv", stringsAsFactors = FALSE)
+unemp <- read.csv("unemployment.csv", stringsAsFactors = FALSE)
 
 # Creating a data frame with the background colour information
 name <- c("Truman", "Eisenhower", "Kennedy", "Johnson", "Nixon",
@@ -32,7 +35,7 @@ start <- as.Date(c("1948-01-01", "1953-01-20", "1961-01-20", "1963-11-22",
 end <- c(start[-1], as.Date("2016-10-01"))
 party <- c("D", "R", "D", "D", "R", "R", "D", "R", "R", "D", "R", "D")
 pres <- data.frame(name, start, end, party, stringsAsFactors=F)
-
+pres
 
 ```
 
@@ -43,24 +46,32 @@ Your code here:
 
 # Transform date column to datetime (lubridate package!)
 
-
+unemp$date <- as_date(unemp$date)
 
 # Create a line-plot with unemployment and date
 
-
+lineplot <- ggplot(unemp) + geom_line(aes(x=date, y=unemp))
+lineplot
 
 # Fix axes and add colored rectangles
 
+datev <- as_date(c("1960-01-01", "1980-01-01", "2000-01-01"))
 
+lineplot <- lineplot +
+  scale_x_date(breaks=c(datev), labels=date_format("%Y"), expand=c(0,0)) +
+  scale_y_continuous(labels = function(x) paste0(x*100, "%"), expand = c(0,0)) +
+  geom_rect(data=pres, aes(xmin=start, xmax=end, ymin=0, ymax=0.12, fill=party), alpha=0.5) +
+  scale_fill_manual(values=alpha(c("blue","red"), 0.2))
+lineplot
 
 # Adding president names
 
-
-
+lineplot <- lineplot + geom_text(data=pres, aes(x=start, y=0.12, label=name), angle=90)
+lineplot
 # Adding lines to separate presidencies
 
-
-
+lineplot <- lineplot + geom_vline(data=pres, aes(xintercept=as.numeric(start)), color="grey50", linetype=5)
+lineplot
 # Finally, moving legend and removing x axis title
 
 
@@ -87,7 +98,7 @@ Judging approximately from the figure, which party writes the longest posts in t
 Reading in the data and some initial processing:
 
 ```{r}
-df <- read.csv("data/fb-congress-data.csv", stringsAsFactors = FALSE)
+df <- read.csv("fb-congress-data.csv", stringsAsFactors = FALSE)
 
 # Transform date column to datetime
 df$date <- as_date(df$date)
@@ -125,7 +136,7 @@ Animated 3D plot:
 #   - z-axis: message_length
 # see ?plot_ly for guidance!
 
-fig <- plot_ly(df_plot, _________, _________, _________, color = ~party)
+fig <- plot_ly(df_plot, x = ~likes_count, y = ~shares_count, z = ~message_length, color = ~party)
 fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(xaxis = list(title = "Log likes count"),
                      yaxis = list(title = "Log shares count"),
