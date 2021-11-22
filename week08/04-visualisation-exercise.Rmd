@@ -60,7 +60,7 @@ datev <- as_date(c("1960-01-01", "1980-01-01", "2000-01-01"))
 lineplot <- lineplot +
   scale_x_date(breaks=c(datev), labels=date_format("%Y"), expand=c(0,0)) +
   scale_y_continuous(labels = function(x) paste0(x*100, "%"), expand = c(0,0)) +
-  geom_rect(data=pres, aes(xmin=start, xmax=end, ymin=0, ymax=0.12, fill=party), alpha=0.5) +
+  geom_rect(data=pres, aes(xmin=start, xmax=end, ymin=0, ymax=0.12, fill=party), alpha=0.3) +
   scale_fill_manual(values=alpha(c("blue","red"), 0.2))
 lineplot
 
